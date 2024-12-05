@@ -1,10 +1,14 @@
 import { Body, Controller, Get, Post, Query, Param } from '@nestjs/common';
 import { EpisodesService } from './episodes.service';
 import { CreateEpisodeDTO } from './dto/episode.dto';
+import { ConfigService } from 'src/config/config.service';
 
 @Controller('episodes')
 export class EpisodesController {
-  constructor(private epsiodesService: EpisodesService) {}
+  constructor(
+    private epsiodesService: EpisodesService,
+    private configService: ConfigService,
+  ) {}
 
   @Get() // GET /episodes
   findAll(@Query('sort') sort: 'asc' | 'desc' = 'desc') {
