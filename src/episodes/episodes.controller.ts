@@ -8,12 +8,15 @@ import {
   NotFoundException,
   ParseIntPipe,
   DefaultValuePipe,
+  UseGuards,
 } from '@nestjs/common';
 import { EpisodesService } from './episodes.service';
 import { CreateEpisodeDTO } from './dto/episode.dto';
 import { ConfigService } from '../config/config.service';
 import { IsPositivePipe } from 'src/pipes/is-positive.pipe';
+import { ApiKeyGuard } from 'src/guards/api-key/api-key.guard';
 
+@UseGuards(ApiKeyGuard) // Can be applied to the entire controller or individual routes or just methods
 @Controller('episodes')
 export class EpisodesController {
   constructor(
