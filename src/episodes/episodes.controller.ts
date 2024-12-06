@@ -6,10 +6,13 @@ import {
   Query,
   Param,
   NotFoundException,
+  ParseIntPipe,
+  DefaultValuePipe,
 } from '@nestjs/common';
 import { EpisodesService } from './episodes.service';
 import { CreateEpisodeDTO } from './dto/episode.dto';
 import { ConfigService } from '../config/config.service';
+import { IsPositivePipe } from 'src/pipes/is-positive.pipe';
 
 @Controller('episodes')
 export class EpisodesController {
@@ -19,8 +22,15 @@ export class EpisodesController {
   ) {}
 
   @Get() // GET /episodes
-  findAll(@Query('sort') sort: 'asc' | 'desc' = 'desc') {
+  findAll(
+    @Query('sort') sort: 'asc' | 'desc' = 'desc',
+    // @Query('limit') limit: number, // Default
+    @Query('limit', ParseIntPipe, new DefaultValuePipe(100), IsPositivePipe)
+    limit: number, // With Built-in Pipes
+  ) {
     console.log(sort);
+    console.log(limit);
+
     return this.epsiodesService.findAll(sort);
   }
 
