@@ -23,7 +23,7 @@ export class EpisodesService {
     return this.episodes.find((episode) => episode.id === id);
   }
   async create(createEpisodeDto: CreateEpisodeDTO) {
-    const newEpisode = { ...createEpisodeDto, id: randomUUID() };
+    const newEpisode: Episode = { id: randomUUID(), ...createEpisodeDto };
     this.episodes.push(newEpisode);
     return newEpisode;
   }

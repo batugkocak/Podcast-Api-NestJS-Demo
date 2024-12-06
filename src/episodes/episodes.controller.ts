@@ -24,9 +24,8 @@ export class EpisodesController {
   @Get() // GET /episodes
   findAll(
     @Query('sort') sort: 'asc' | 'desc' = 'desc',
-    // @Query('limit') limit: number, // Default
-    @Query('limit', ParseIntPipe, new DefaultValuePipe(100), IsPositivePipe)
-    limit: number, // With Built-in Pipes
+    @Query('limit', new DefaultValuePipe(100), ParseIntPipe, IsPositivePipe)
+    limit: number,
   ) {
     console.log(sort);
     console.log(limit);
