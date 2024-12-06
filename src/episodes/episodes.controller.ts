@@ -1,7 +1,7 @@
 import { Body, Controller, Get, Post, Query, Param } from '@nestjs/common';
 import { EpisodesService } from './episodes.service';
 import { CreateEpisodeDTO } from './dto/episode.dto';
-import { ConfigService } from 'src/config/config.service';
+import { ConfigService } from '../config/config.service';
 
 @Controller('episodes')
 export class EpisodesController {
